@@ -52,7 +52,7 @@ cooked-goose [directory] [flags]
 | `--up`          | Process only `*.up.sql` files.                                              |
 | `--down`        | Process only `*.down.sql` files.                                            |
 | `--overwrite`   | Overwrite the output `_cooked` directory if it already exists.              |
-| `--output-dir`  | Specify a custom output directory (default is `[directory]_cooked`).        |
+| `--output-dir`  | Specify a custom output directory (default is a sibling to the passed directory called `[directory]_cooked`).        |
 | `--help`        | Display help information for the command.                                   |
 
 ### Examples
