@@ -95,28 +95,6 @@ cooked-goose --help
 
 ---
 
-## Development
-
-### Directory Structure
-
-```
-cooked-goose/
-├── cmd/
-│   └── main.go          # Entry point of the utility
-├── internal/
-│   ├── processor.go     # File processing and interpolation logic
-├── go.mod               # Module dependencies
-└── README.md            # Documentation
-```
-
-### Testing
-Run tests with:
-```bash
-go test ./...
-```
-
----
-
 ## Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request.
