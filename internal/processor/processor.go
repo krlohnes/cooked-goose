@@ -35,7 +35,7 @@ func ProcessDirectory(inputDir, outputDir string, filter string, overwrite bool)
 		// Filter files based on flags
 		if (filter == "up" && filepath.Ext(path) != ".up.sql") ||
 			(filter == "down" && filepath.Ext(path) != ".down.sql") {
-			return err
+			return nil
 		}
 
 		// Read file content
@@ -56,6 +56,15 @@ func ProcessDirectory(inputDir, outputDir string, filter string, overwrite bool)
 		relPath, _ := filepath.Rel(inputDir, path)
 		outputPath := filepath.Join(outputDir, relPath)
 		os.MkdirAll(filepath.Dir(outputPath), 0755)
+
+		// Check if the file exists and handle overwrite logic
+		if !overwrite {
+			if _, err := os.Stat(outputPath); err == nil {
+				fmt.Printf("Skipping existing file %s (overwrite disabled)\n", outputPath)
+				return nil
+			}
+		}
+
 		err = os.WriteFile(outputPath, []byte(processed), 0644)
 		if err != nil {
 			fmt.Printf("Error writing file %s: %v\n", outputPath, err)
