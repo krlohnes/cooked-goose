@@ -14,6 +14,12 @@ type envWrapper struct{}
 var _ interpolate.Env = (*envWrapper)(nil)
 
 func (e *envWrapper) Get(key string) (string, bool) {
+	_, b := os.LookupEnv(key)
+	if !b {
+		//Panicking because the interpolate library doesn't quite work as
+		//expected and this is fairly necessary with this tool
+		panic(fmt.Sprintf("%s not set in environment", key))
+	}
 	return os.LookupEnv(key)
 }
 
@@ -86,14 +92,13 @@ func processFileContent(content string) (string, error) {
 
 		// If within an ENVSUB block, interpolate variables
 		if isInterpolating {
+			fmt.Println("Interpolating " + line)
 			interpolatedLine, err := interpolate.Interpolate(&envWrapper{}, line)
+			fmt.Println("ERR ", err)
 			if err != nil {
-				// Error out on missing environment variables
-				if strings.Contains(err.Error(), "missing environment variable") {
-					return "", fmt.Errorf("missing environment variable in line: %q", line)
-				}
-				return "", fmt.Errorf("error interpolating line: %q: %w", line, err)
+				return "", fmt.Errorf("error interpolating line %q: %w", line, err)
 			}
+			fmt.Println("New line is ", interpolatedLine)
 			result.WriteString(interpolatedLine + "\n")
 		} else {
 			// Write the line as is
