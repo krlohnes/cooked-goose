@@ -39,6 +39,13 @@ Now, you can use `cooked-goose` from anywhere on your system.
 
 ---
 
+Alternatively, you can do: 
+
+```
+go install github.com/krlohnes/cooked-goose@latest
+```
+Make sure that you have `$GOBIN` in your `$PATH`. See `https://go.dev/ref/mod#go-install` for more information
+
 ## Usage
 
 ### Command Syntax

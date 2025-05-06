@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"krlohnes/cooked-goose/internal/processor"
+	"github.com/krlohnes/cooked-goose/internal/processor"
 )
 
 func main() {
