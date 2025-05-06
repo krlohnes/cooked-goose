@@ -1,4 +1,4 @@
-module krlohnes/cooked-goose
+module github.com/krlohnes/cooked-goose
 
 go 1.23.3
 
